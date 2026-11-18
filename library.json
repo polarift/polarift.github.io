@@ -1,0 +1,20 @@
+{
+  "categories": [
+    { "slug": "se-practice", "name": "SE Practice" },
+    { "slug": "mbse-modeling", "name": "MBSE & Modeling" },
+    { "slug": "verification-validation-test", "name": "Verification, Validation & Test" },
+    { "slug": "standards-process", "name": "Standards & Process" },
+    { "slug": "careers-certification", "name": "Careers & Certification" },
+    { "slug": "resources", "name": "Resources" }
+  ],
+  "items": [
+    {
+      "path": "se-practice/lecture-01-intro-to-systems-architecture",
+      "title": "Lecture 01: Introduction to Systems Architecture",
+      "author": "John G. Artus",
+      "category": "se-practice",
+      "type": "slides",
+      "pdf": "slides.pdf"
+    }
+  ]
+}

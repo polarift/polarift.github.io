@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Polarift Library</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#171a26;--muted:#5d6272;--card:#fff;--line:#dcd9d1;--accent:#2b5fd9}
+@media (prefers-color-scheme:dark){:root{--bg:#14161c;--fg:#e8e9ee;--muted:#9aa0b3;--card:#1c1f27;--line:#2c303b;--accent:#7aa2ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+h1{margin:0 0 4px;font-size:28px}p.lead{margin:0 0 28px;color:var(--muted)}
+h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:32px 0 10px}
+.card{display:flex;gap:12px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.card a{color:var(--accent);text-decoration:none;font-weight:600}.card small{display:block;color:var(--muted);font-weight:400}
+.pdf{white-space:nowrap;font-size:14px}
+</style></head><body><main>
+<h1>Polarift Library</h1>
+<p class="lead">Slide decks and files shared on the Polarift forum.</p>
+<div id="list">Loading...</div>
+</main>
+<script>
+fetch('library.json').then(r=>r.json()).then(lib=>{
+  const box=document.getElementById('list');box.textContent='';
+  for(const cat of lib.categories){
+    const items=lib.items.filter(i=>i.category===cat.slug);if(!items.length)continue;
+    const h=document.createElement('h2');h.textContent=cat.name;box.append(h);
+    for(const it of items){
+      const c=document.createElement('div');c.className='card';
+      const a=document.createElement('a');a.href=it.path+'/';a.textContent=it.title;
+      const s=document.createElement('small');s.textContent=it.author||'';
+      const left=document.createElement('div');left.append(a,s);c.append(left);
+      if(it.pdf){const p=document.createElement('a');p.className='pdf';p.href=it.path+'/'+it.pdf;p.textContent='PDF';c.append(p);}
+      box.append(c);
+    }
+  }
+}).catch(()=>{document.getElementById('list').textContent='Could not load the library.';});
+</script></body></html>
